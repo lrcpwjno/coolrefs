@@ -3,17 +3,14 @@
   "name": "CoolRefs",
   "version": "0.0.1",
   "icons": {
-    "16": "images/hello_extension.png"
+    "16": "images/hello_extensions.png"
   },
   "background": {
     "service_worker": "background.js"
   },
-  "page_action": {
-    "default_title": "Download tweet images, CoolRefs style",
-    "default_popup": "popup.html"
-  },
   "permissions": [
     "activeTab",
-    "contextMenus"
+    "contextMenus",
+    "downloads"
   ]
 }

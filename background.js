@@ -1,3 +1,3 @@
 const twitter = 'https://twitter.com'
 
-chrome.action.onClicked.
+chrome.action.onClicked.a

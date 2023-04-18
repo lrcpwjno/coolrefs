@@ -1,40 +1,9 @@
 const twitter = 'https://twitter.com/';
 
-var path = '/Users/vl1000278391/PycharmProjects/CoolRefs/images/';
-console.log("path is", path);
-// path is unused for now because extension can only go to default downloads folder
-// so the whole listener setup, popup, action etc.
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === "update_path") {
-        path_update = update_path(request.new_path);
-        sendResponse({response: "OK"});
-    };
-});
-
-function update_path(new_path) {
-    path = new_path;
-    console.log("background: new path is", path);
-};
-
-function testFunction() {
-    console.log("you just clicked the context menu item...")
-    console.log(path)
-};
-
 function getPics(info, tab) {
-    console.log(info);
-
     console.log(info.pageUrl);  // current url where you are sitting
     console.log(info.srcUrl);   // the photo url
-    console.log(info.linkUrl);  // if it's a link then this is the destination
-
-    // work your string magic
-    
-    // https://twitter.com/momo_mark2/status/1647894313714720768/photo/1 ->
-    //   ["", "momo_mark2", "status", "1647894313714720768", "photo", "1"]
-    // https://twitter.com/lrnowjcp -> ["", "lrnowjcp"]
-    // main -> ["", "home"]
+    console.log(info.linkUrl);  // if it's a link, this is the destination
 
     if (info.linkUrl) {
         console.log("invoked from the TL, likes list, or ");
@@ -48,7 +17,6 @@ function getPics(info, tab) {
     };
     console.log("PHOTO FILENAME: ", filename);
 
-    // find out the right extension
     if (info.srcUrl.includes("format=png")) {
         ext = ".png";
     } else if (info.srcUrl.includes("format=jpg")) {
@@ -58,14 +26,11 @@ function getPics(info, tab) {
         ext = "";
     }
 
-    // todo: get the maximum size we can (original if possible?...)
+    let source = info.srcUrl.split("&");
+    console.log(source);
 
-    // now download that thing to the path specified earlier...
-    // if it turns out we can't get out of default downloads folder easily, then that's ok
-    // moving files in bulk is easy, the hard part is naming them properly
-    // plus it lets us move stuff to landscape, tech, etc if needed
     chrome.downloads.download({
-        url: info.srcUrl,
+        url: source[0] + "&name=orig",
         filename: "coolrefs/" + filename + ext
     });
 };

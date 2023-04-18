@@ -2,6 +2,8 @@ const twitter = 'https://twitter.com/';
 
 var path = '/Users/vl1000278391/PycharmProjects/CoolRefs/images/';
 console.log("path is", path);
+// path is unused for now because extension can only go to default downloads folder
+// so the whole listener setup, popup, action etc.
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message === "update_path") {

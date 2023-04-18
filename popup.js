@@ -1,6 +1,5 @@
 document.getElementById("submitbutton").addEventListener("click", updatePath);
 
-
 function updatePath() {
     var path = document.getElementById("localdestination").value;
     var msg = "entered path is " + path;
@@ -16,5 +15,4 @@ function updatePath() {
             // console.log(response.response)
         }
     )
-
 };
